@@ -5,9 +5,9 @@ services:
     container_name: app
     image: gperdrizet/postit:app
     environment:
-      - HF_HOME: /data
-      - FLASK_IP: $FLASK_IP
-      - FLASK_PORT: $FLASK_PORT
+      HF_HOME: /data
+      FLASK_IP: $FLASK_IP
+      FLASK_PORT: $FLASK_PORT
     command: python postit.py
 
   model:
@@ -16,13 +16,13 @@ services:
     volumes:
       - $HF_HOME:/data
     environment:
-      - HF_HOME: /data
-      - FLASK_IP: $FLASK_IP
-      - FLASK_PORT: $FLASK_PORT
-      - REDIS_IP: redis
-      - REDIS_PORT: $REDIS_PORT
-      - HF_TOKEN: $HF_TOKEN
-      - REDIS_PASSWORD: $REDIS_PASSWORD
+      HF_HOME: /data
+      FLASK_IP: $FLASK_IP
+      FLASK_PORT: $FLASK_PORT
+      REDIS_IP: redis
+      REDIS_PORT: $REDIS_PORT
+      HF_TOKEN: $HF_TOKEN
+      REDIS_PASSWORD: $REDIS_PASSWORD
     ports:
       - $FLASK_PORT:$FLASK_PORT 
     deploy:
@@ -30,7 +30,7 @@ services:
         reservations:
           devices:
           - driver: nvidia
-            device_ids: ['0', '1', '2']
+            device_ids: ['1']
             capabilities: [gpu]
     command: ./start_model.sh
 
@@ -39,9 +39,9 @@ services:
     image: gperdrizet/postit:redis
     privileged: true
     environment:
-      - REDIS_IP: $REDIS_IP
-      - REDIS_PORT: $REDIS_PORT
-      - REDIS_PASSWORD: $REDIS_PASSWORD
+      REDIS_IP: $REDIS_IP
+      REDIS_PORT: $REDIS_PORT
+      REDIS_PASSWORD: $REDIS_PASSWORD
     ports:
       - '$REDIS_PORT:$REDIS_PORT'
     command: ./start_server.sh
