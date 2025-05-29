@@ -1,5 +1,4 @@
-'''Main module to initialize LLM, set-up and launch Celery & Flask apps
-using either Gunicorn or the Flask development server'''
+'''Main module to initialize LLM backend'''
 
 import logging
 from logging.handlers import RotatingFileHandler
@@ -33,12 +32,14 @@ pipeline = pipeline(
     torch_dtype=bfloat16
 )
 
+logger.info('Pipeline initialized')
+
 # Initialize Flask app
 flask_app = api_funcs.create_flask_celery_app(pipeline)
 logger.info('Flask app initialized')
 
 
-if __name__ == 'api':
+if __name__ == 'model':
 
     # Start the celery app
     api_funcs.start_celery(flask_app)

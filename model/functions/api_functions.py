@@ -41,7 +41,7 @@ def create_flask_celery_app(pipeline: Callable) -> Flask:
     # Make the app
     app=Flask(__name__)
 
-    # Make redis url"
+    # Make redis url
     redis_url = (f"redis://:{os.environ['REDIS_PASSWORD']}@" +
         f"{os.environ['REDIS_IP']}:{os.environ['REDIS_PORT']}")
 
