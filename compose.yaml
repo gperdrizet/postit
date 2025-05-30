@@ -3,16 +3,16 @@ name: postit
 services:
   app:
     container_name: app
-    image: gperdrizet/postit:app
+    image: gperdrizet/postit-app
     environment:
       HF_HOME: /data
-      FLASK_IP: $FLASK_IP
+      FLASK_IP: model
       FLASK_PORT: $FLASK_PORT
     command: python postit.py
 
   model:
     container_name: model
-    image: gperdrizet/postit:model
+    image: gperdrizet/postit-model
     volumes:
       - $HF_HOME:/data
     environment:
@@ -36,8 +36,7 @@ services:
 
   redis:
     container_name: redis
-    image: gperdrizet/postit:redis
-    privileged: true
+    image: gperdrizet/postit-redis
     environment:
       REDIS_IP: $REDIS_IP
       REDIS_PORT: $REDIS_PORT
@@ -45,3 +44,4 @@ services:
     ports:
       - '$REDIS_PORT:$REDIS_PORT'
     command: ./start_server.sh
+    privileged: true
