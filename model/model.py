@@ -12,6 +12,11 @@ import functions.api_functions as api_funcs
 # Make sure log directory exists
 Path('logs').mkdir(parents=True, exist_ok=True)
 
+# Clear any old logs
+for file_path in Path('logs').glob('*.log'):
+    if file_path.is_file():
+        file_path.unlink()
+
 # Get the logger
 logger = logging.getLogger(__name__)
 
