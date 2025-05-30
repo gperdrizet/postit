@@ -19,7 +19,7 @@ services:
       HF_HOME: /data
       FLASK_IP: $FLASK_IP
       FLASK_PORT: $FLASK_PORT
-      REDIS_IP: redis
+      REDIS_IP: 'redis'
       REDIS_PORT: $REDIS_PORT
       HF_TOKEN: $HF_TOKEN
       REDIS_PASSWORD: $REDIS_PASSWORD

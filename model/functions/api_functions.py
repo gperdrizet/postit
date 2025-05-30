@@ -51,7 +51,10 @@ def create_flask_celery_app(pipeline: Callable) -> Flask:
             broker_url=redis_url,
             result_backend=redis_url,
             task_ignore_result=True,
-            broker_connection_retry_on_startup=True
+            broker_connection_retry_on_startup=True,
+            user='nobody',
+            group='nogroup'
+
         ),
     )
 
